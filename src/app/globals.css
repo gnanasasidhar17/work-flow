@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Creme / Beige Light Theme */
+    --background: 40 33% 97%;
+    --foreground: 24 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 10% 10%;
+    --primary: 30 35% 56%;
+    --primary-foreground: 40 33% 97%;
+    --secondary: 35 25% 93%;
+    --secondary-foreground: 24 10% 10%;
+    --muted: 35 20% 94%;
+    --muted-foreground: 24 5% 46%;
+    --accent: 33 25% 88%;
+    --accent-foreground: 24 10% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 30 35% 56%;
+    --radius: 0.75rem;
+    --chart-1: 30 35% 56%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 220 70% 55%;
+    --chart-4: 280 60% 55%;
+    --chart-5: 40 80% 55%;
+    --sidebar: 35 25% 95%;
+    --sidebar-foreground: 24 10% 10%;
+    --sidebar-primary: 30 35% 56%;
+    --sidebar-primary-foreground: 40 33% 97%;
+    --sidebar-accent: 33 25% 90%;
+    --sidebar-accent-foreground: 24 10% 10%;
+    --sidebar-border: 30 15% 88%;
+    --sidebar-ring: 30 35% 56%;
+  }
+
+  .dark {
+    --background: 24 10% 10%;
+    --foreground: 35 25% 93%;
+    --card: 24 8% 14%;
+    --card-foreground: 35 25% 93%;
+    --popover: 24 8% 14%;
+    --popover-foreground: 35 25% 93%;
+    --primary: 30 35% 56%;
+    --primary-foreground: 24 10% 10%;
+    --secondary: 24 8% 18%;
+    --secondary-foreground: 35 25% 93%;
+    --muted: 24 8% 18%;
+    --muted-foreground: 30 10% 55%;
+    --accent: 24 8% 22%;
+    --accent-foreground: 35 25% 93%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 24 8% 22%;
+    --input: 24 8% 22%;
+    --ring: 30 35% 56%;
+    --chart-1: 30 35% 60%;
+    --chart-2: 160 60% 50%;
+    --chart-3: 220 70% 60%;
+    --chart-4: 280 60% 60%;
+    --chart-5: 40 80% 60%;
+    --sidebar: 24 8% 12%;
+    --sidebar-foreground: 35 25% 93%;
+    --sidebar-primary: 30 35% 56%;
+    --sidebar-primary-foreground: 24 10% 10%;
+    --sidebar-accent: 24 8% 18%;
+    --sidebar-accent-foreground: 35 25% 93%;
+    --sidebar-border: 24 8% 22%;
+    --sidebar-ring: 30 35% 56%;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+  html {
+    @apply scroll-smooth;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Kanban specific */
+.kanban-column {
+  min-height: 200px;
+}
+.kanban-card-dragging {
+  opacity: 0.5;
+  transform: rotate(3deg);
+}
+.kanban-card-overlay {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transform: rotate(2deg);
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--accent)) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

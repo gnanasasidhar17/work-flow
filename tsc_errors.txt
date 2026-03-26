@@ -1,0 +1,38 @@
+scripts/setup-appwrite.ts(113,25): error TS2339: Property 'getTable' does not exist on type 'Databases'.
+src/app/(dashboard)/page.tsx(327,40): error TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+src/app/(dashboard)/settings/page.tsx(158,42): error TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+src/app/(dashboard)/workspace/[workspaceId]/project/[projectId]/page.tsx(168,42): error TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+src/app/(dashboard)/workspace/[workspaceId]/project/[projectId]/page.tsx(180,44): error TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+src/components/layout/sidebar.tsx(84,32): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & Props<unknown>'.
+  Property 'asChild' does not exist on type 'IntrinsicAttributes & Props<unknown>'.
+src/components/layout/sidebar.tsx(198,32): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & Props<unknown>'.
+  Property 'asChild' does not exist on type 'IntrinsicAttributes & Props<unknown>'.
+src/components/layout/topbar.tsx(70,34): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & Props<unknown>'.
+  Property 'asChild' does not exist on type 'IntrinsicAttributes & Props<unknown>'.
+src/components/tasks/task-dialog.tsx(167,42): error TS2322: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+src/components/tasks/task-dialog.tsx(185,33): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & NativeButtonProps & Omit<WithBaseUIEvent<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref"> & { ...; }>, "className" | ... 2 more ... | "defaultChecked"> & { ...; } & { ...; }'.
+  Property 'asChild' does not exist on type 'IntrinsicAttributes & NativeButtonProps & Omit<WithBaseUIEvent<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref"> & { ...; }>, "className" | ... 2 more ... | "defaultChecked"> & { ...; } & { ...; }'.
+src/server/setup-db.ts(153,66): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(154,71): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(157,69): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(158,66): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(159,65): error TS2345: Argument of type '"fulltext"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(162,71): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(165,66): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(168,64): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.
+src/server/setup-db.ts(169,71): error TS2345: Argument of type '"key"' is not assignable to parameter of type 'IndexType'.

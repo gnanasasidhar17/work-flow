@@ -1,0 +1,12 @@
+[dotenv@17.3.1] injecting env (3) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+🚀 Setting up Work-flow database...
+
+[TypeError: fetch failed] {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted addresses: 151.101.131.52:443, 151.101.195.52:443, 151.101.3.52:443, 151.101.67.52:443)
+      at onConnectTimeout (C:\Users\gnana\Work-flow\node_modules\node-fetch-native-with-agent\dist\shared\node-fetch-native-with-agent.df7e6bd6.cjs:1:43536)
+      at C:\Users\gnana\Work-flow\node_modules\node-fetch-native-with-agent\dist\shared\node-fetch-native-with-agent.df7e6bd6.cjs:1:42805
+      at Immediate._onImmediate (C:\Users\gnana\Work-flow\node_modules\node-fetch-native-with-agent\dist\shared\node-fetch-native-with-agent.df7e6bd6.cjs:1:43215)
+      at process.processImmediate (node:internal/timers:504:21) {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}

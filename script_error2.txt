@@ -1,0 +1,11 @@
+[dotenv@17.3.1] injecting env (3) from .env.local -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+🚀 Setting up Work-flow database...
+
+AppwriteException: The maximum number of databases allowed for the selected plan has reached. Upgrade to increase the limit.
+    at _Client.call (C:\Users\gnana\Work-flow\node_modules\node-appwrite\src\client.ts:419:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async setup (C:\Users\gnana\Work-flow\src\server\setup-db.ts:24:5) {
+  code: 403,
+  type: 'additional_resource_not_allowed',
+  response: '{"message":"The maximum number of databases allowed for the selected plan has reached. Upgrade to increase the limit.","code":403,"type":"additional_resource_not_allowed","version":"1.9.0"}'
+}

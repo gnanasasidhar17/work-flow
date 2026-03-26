@@ -1,0 +1,1 @@
+{"msg":"The maximum number of buckets allowed for the selected plan has reached. Upgrade to increase the limit.","code":403,"response":"{\"message\":\"The maximum number of buckets allowed for the selected plan has reached. Upgrade to increase the limit.\",\"code\":403,\"type\":\"additional_resource_not_allowed\",\"version\":\"1.9.0\"}"}

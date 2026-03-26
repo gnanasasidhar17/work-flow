@@ -1,0 +1,79 @@
+
+./src/components/data-table/data-table-view.tsx
+20:3  Error: 'SelectValue' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/kanban/kanban-board.tsx
+14:8  Error: 'DragOverEvent' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/kanban/kanban-card.tsx
+9:18  Error: 'isAfter' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/layout/sidebar.tsx
+17:3  Error: 'FolderKanban' is defined but never used.  @typescript-eslint/no-unused-vars
+34:10  Error: 'useState' is defined but never used.  @typescript-eslint/no-unused-vars
+46:40  Error: 'wsLoading' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/layout/topbar.tsx
+6:10  Error: 'Input' is defined but never used.  @typescript-eslint/no-unused-vars
+26:36  Error: 'UserIcon' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/hooks/use-auth.ts
+11:20  Error: 'setLoading' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+44:22  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+66:22  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+99:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/middleware/auth.ts
+15:13  Error: 'users' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+28:12  Error: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/server/routes/auth.ts
+4:14  Error: 'Query' is defined but never used.  @typescript-eslint/no-unused-vars
+6:10  Error: 'DATABASE_ID' is defined but never used.  @typescript-eslint/no-unused-vars
+6:23  Error: 'COLLECTIONS' is defined but never used.  @typescript-eslint/no-unused-vars
+36:23  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+60:23  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+85:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/routes/invites.ts
+28:13  Error: 'existingMembers' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+53:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+102:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+120:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/routes/projects.ts
+26:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+38:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+61:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+81:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+103:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/routes/tasks.ts
+4:36  Error: 'STORAGE_BUCKETS' is defined but never used.  @typescript-eslint/no-unused-vars
+20:22  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+32:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+61:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+89:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+126:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+138:40  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+151:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+179:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+201:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/routes/workspaces.ts
+39:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+69:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+100:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+153:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+189:21  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/server/setup-db.ts
+4:29  Error: 'ID' is defined but never used.  @typescript-eslint/no-unused-vars
+26:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+98:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+106:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+125:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+141:17  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+171:15  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules

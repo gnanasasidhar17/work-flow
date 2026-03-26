@@ -1,0 +1,7 @@
+[dotenv@17.3.1] injecting env (3) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+{
+  "msg": "The maximum number of databases allowed for the selected plan has reached. Upgrade to increase the limit.",
+  "code": 403,
+  "type": "additional_resource_not_allowed",
+  "response": "{\"message\":\"The maximum number of databases allowed for the selected plan has reached. Upgrade to increase the limit.\",\"code\":403,\"type\":\"additional_resource_not_allowed\",\"version\":\"1.9.0\"}"
+}
