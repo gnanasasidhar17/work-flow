@@ -3,7 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { account } from "@/lib/appwrite";
 import { useAuthStore } from "@/stores/auth-store";
-import { ID } from "appwrite";
+import { ID, OAuthProvider } from "appwrite";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -111,8 +111,8 @@ export function useGoogleOAuth() {
       } catch {
         // Ignore
       }
-      account.createOAuth2Session(
-        "google" as any,
+      await account.createOAuth2Session(
+        OAuthProvider.Google,
         `${window.location.origin}/dashboard`,
         `${window.location.origin}/login`
       );

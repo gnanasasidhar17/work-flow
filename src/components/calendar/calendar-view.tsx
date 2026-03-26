@@ -101,7 +101,7 @@ export function CalendarView({ tasks, onEditTask, onCreateTask }: CalendarViewPr
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-px flex-1 bg-border rounded-xl overflow-hidden">
+      <div className="grid grid-cols-7 gap-px flex-1 bg-border rounded-xl overflow-y-auto min-h-0">
         {days.map((day) => {
           const dateKey = format(day, "yyyy-MM-dd");
           const dayTasks = tasksByDate[dateKey] || [];
