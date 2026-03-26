@@ -80,8 +80,9 @@ export function useUpdateProject() {
       });
       return data.data as Project;
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({ queryKey: ["project", variables.id] });
       toast.success("Project updated!");
     },
     onError: (error: Error) => {
