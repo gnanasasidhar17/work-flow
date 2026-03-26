@@ -29,8 +29,12 @@ export default function LoginPage() {
 
       <Card className="w-full max-w-md relative z-10 shadow-lg border-border/50">
         <CardHeader className="text-center space-y-4 pb-2">
-          <div className="mx-auto w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-            <FolderKanban className="h-7 w-7 text-primary" />
+          <div className="mx-auto pt-2 pb-2">
+            <svg id="logo-38" width="85" height="35" viewBox="0 0 78 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm mx-auto">
+              <path d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z" className="ccustom" fill="#FF7A00" />
+              <path d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z" className="ccompli1" fill="#FF9736" />
+              <path d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z" className="ccompli2" fill="#FFBC7D" />
+            </svg>
           </div>
           <div>
             <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
@@ -73,7 +77,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

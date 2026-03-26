@@ -80,8 +80,17 @@ export function Sidebar() {
 
   return (
     <div className="h-screen w-64 border-r border-border bg-sidebar flex flex-col">
+      {/* App Logo */}
+      <div className="px-6 pt-6 pb-2">
+        <svg id="logo-38" width="85" height="35" viewBox="0 0 78 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
+          <path d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z" className="ccustom" fill="#FF7A00" />
+          <path d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z" className="ccompli1" fill="#FF9736" />
+          <path d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z" className="ccompli2" fill="#FFBC7D" />
+        </svg>
+      </div>
+
       {/* Workspace Switcher */}
-      <div className="p-4 flex items-center justify-between">
+      <div className="px-4 pb-4 pt-2 flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger render={<Button variant="ghost" className="w-full justify-between h-auto p-2 font-semibold" />}>
               <div className="flex items-center gap-2 min-w-0">
