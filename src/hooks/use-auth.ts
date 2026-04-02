@@ -119,3 +119,45 @@ export function useGoogleOAuth() {
     },
   });
 }
+
+export function useForgotPassword() {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      await account.createRecovery(
+        email,
+        `${window.location.origin}/reset-password`
+      );
+    },
+    onSuccess: () => {
+      toast.success("Recovery email sent! Check your inbox.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Failed to send recovery email");
+    },
+  });
+}
+
+export function useResetPassword() {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: async ({
+      userId,
+      secret,
+      password,
+    }: {
+      userId: string;
+      secret: string;
+      password: string;
+    }) => {
+      await account.updateRecovery(userId, secret, password);
+    },
+    onSuccess: () => {
+      toast.success("Password reset successfully! Please sign in.");
+      router.push("/login");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Failed to reset password");
+    },
+  });
+}
