@@ -85,7 +85,7 @@ export function TopBar() {
             {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </Button>
           <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-9 w-9 relative outline-none" />}>
+            <DropdownMenuTrigger render={<button className="inline-flex items-center justify-center h-9 w-9 rounded-lg hover:bg-muted transition-colors relative outline-none cursor-pointer" />}>
               <Bell className="h-4 w-4" />
               {invites && invites.length > 0 && (
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -129,7 +129,7 @@ export function TopBar() {
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" className="h-9 w-9 rounded-full p-0" />}>
+            <DropdownMenuTrigger render={<button className="inline-flex items-center justify-center h-9 w-9 rounded-full p-0 hover:bg-muted transition-colors outline-none cursor-pointer" />}>
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="text-xs bg-primary text-primary-foreground">
                     {user?.name?.charAt(0)?.toUpperCase() || "U"}

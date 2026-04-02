@@ -90,22 +90,31 @@ export function Sidebar() {
       </div>
 
       {/* Workspace Switcher */}
-      <div className="px-4 pb-4 pt-2 flex items-center justify-between">
+      <div className="px-4 pb-4 pt-2 flex items-center justify-between gap-1">
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="ghost" className="w-full justify-between h-auto p-2 font-semibold" />}>
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-sm font-bold text-primary shrink-0">
-                  {activeWorkspace?.name?.charAt(0)?.toUpperCase() || "W"}
-                </div>
-                <span className="truncate text-sm">{activeWorkspace?.name || "Select Workspace"}</span>
+          <DropdownMenuTrigger
+            render={
+              <button
+                className="flex items-center justify-between w-full rounded-lg px-2 py-2 text-sm font-semibold hover:bg-muted transition-colors outline-none cursor-pointer"
+              />
+            }
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-sm font-bold text-primary shrink-0">
+                {activeWorkspace?.name?.charAt(0)?.toUpperCase() || "W"}
               </div>
-              <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
+              <span className="truncate text-sm">{activeWorkspace?.name || "Select Workspace"}</span>
+            </div>
+            <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-56">
             {workspaces?.map((ws) => (
               <DropdownMenuItem
                 key={ws.$id}
-                onClick={() => setActiveWorkspace(ws.$id)}
+                onClick={() => {
+                  setActiveWorkspace(ws.$id);
+                  router.push("/dashboard");
+                }}
                 className={cn(ws.$id === activeWorkspaceId && "bg-accent")}
               >
                 <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary mr-2">
@@ -114,6 +123,7 @@ export function Sidebar() {
                 {ws.name}
               </DropdownMenuItem>
             ))}
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => router.push("/dashboard?create=workspace")}>
               <Plus className="h-4 w-4 mr-2" />
               Create Workspace
@@ -203,16 +213,20 @@ export function Sidebar() {
       {/* User Section */}
       <div className="p-3">
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="ghost" className="w-full justify-start gap-2 h-auto p-2" />}>
-              <Avatar className="h-7 w-7">
-                <AvatarFallback className="text-xs bg-primary/10 text-primary">
-                  {user?.name?.charAt(0)?.toUpperCase() || "U"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="min-w-0 text-left">
-                <p className="text-sm font-medium truncate">{user?.name || "User"}</p>
-                <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
-              </div>
+          <DropdownMenuTrigger
+            render={
+              <button className="flex items-center gap-2 w-full rounded-lg p-2 text-left hover:bg-muted transition-colors outline-none cursor-pointer" />
+            }
+          >
+            <Avatar className="h-7 w-7">
+              <AvatarFallback className="text-xs bg-primary/10 text-primary">
+                {user?.name?.charAt(0)?.toUpperCase() || "U"}
+              </AvatarFallback>
+            </Avatar>
+            <div className="min-w-0 text-left">
+              <p className="text-sm font-medium truncate">{user?.name || "User"}</p>
+              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-56">
             <DropdownMenuItem onClick={() => router.push("/settings")}>
