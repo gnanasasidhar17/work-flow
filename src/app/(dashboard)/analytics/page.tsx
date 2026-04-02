@@ -1,12 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useWorkspaceStore } from "@/stores/workspace-store";
 import { useWorkspaceTasks } from "@/hooks/use-tasks";
 import { useProjects } from "@/hooks/use-projects";
 import { useWorkspaceMembers } from "@/hooks/use-workspaces";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
 import {
   BarChart3,
   CheckCircle2,
@@ -15,14 +19,42 @@ import {
   TrendingUp,
   Users,
   FolderKanban,
+  X,
+  ArrowUpDown,
+  Calendar,
 } from "lucide-react";
 import { TASK_STATUSES, TASK_PRIORITIES } from "@/lib/constants";
+import type { Task } from "@/types";
+
+type FilterType = "all" | "completed" | "in-progress" | "overdue" | null;
 
 export default function AnalyticsPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { activeWorkspaceId } = useWorkspaceStore();
   const { data: tasks, isLoading } = useWorkspaceTasks(activeWorkspaceId);
   const { data: projects } = useProjects(activeWorkspaceId);
   const { data: members } = useWorkspaceMembers(activeWorkspaceId);
+
+  const [activeFilter, setActiveFilter] = useState<FilterType>(null);
+
+  // Read filter from URL on mount
+  useEffect(() => {
+    const filter = searchParams.get("filter") as FilterType;
+    if (filter) {
+      setActiveFilter(filter);
+    }
+  }, [searchParams]);
+
+  const handleFilterClick = (filter: FilterType) => {
+    if (activeFilter === filter) {
+      setActiveFilter(null);
+      router.replace("/analytics", { scroll: false });
+    } else {
+      setActiveFilter(filter);
+      router.replace(`/analytics?filter=${filter}`, { scroll: false });
+    }
+  };
 
   const stats = useMemo(() => {
     if (!tasks) return null;
@@ -58,6 +90,33 @@ export default function AnalyticsPage() {
     };
   }, [tasks]);
 
+  // Filter tasks based on active filter
+  const filteredTasks = useMemo(() => {
+    if (!tasks || !activeFilter) return [];
+
+    switch (activeFilter) {
+      case "all":
+        return tasks;
+      case "completed":
+        return tasks.filter((t) => t.status === "done");
+      case "in-progress":
+        return tasks.filter((t) => t.status === "in-progress");
+      case "overdue":
+        return tasks.filter(
+          (t) => t.dueDate && new Date(t.dueDate) < new Date() && t.status !== "done"
+        );
+      default:
+        return [];
+    }
+  }, [tasks, activeFilter]);
+
+  const filterLabel: Record<string, string> = {
+    all: "All Tasks",
+    completed: "Completed Tasks",
+    "in-progress": "In Progress Tasks",
+    overdue: "Overdue Tasks",
+  };
+
   if (isLoading) {
     return (
       <div className="p-6 space-y-6">
@@ -76,13 +135,15 @@ export default function AnalyticsPage() {
         <p className="text-muted-foreground text-sm mt-1">Workspace performance overview</p>
       </div>
 
-      {/* Overview Stats */}
+      {/* Overview Stats - Clickable */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           title="Total Tasks"
           value={stats?.totalTasks || 0}
           icon={<BarChart3 className="h-5 w-5" />}
           colors="text-blue-600 bg-blue-50"
+          active={activeFilter === "all"}
+          onClick={() => handleFilterClick("all")}
         />
         <StatCard
           title="Completed"
@@ -90,20 +151,74 @@ export default function AnalyticsPage() {
           icon={<CheckCircle2 className="h-5 w-5" />}
           colors="text-emerald-600 bg-emerald-50"
           subtitle={`${stats?.completionRate || 0}% completion rate`}
+          active={activeFilter === "completed"}
+          onClick={() => handleFilterClick("completed")}
         />
         <StatCard
           title="In Progress"
           value={stats?.inProgressTasks || 0}
           icon={<Clock className="h-5 w-5" />}
           colors="text-amber-600 bg-amber-50"
+          active={activeFilter === "in-progress"}
+          onClick={() => handleFilterClick("in-progress")}
         />
         <StatCard
           title="Overdue"
           value={stats?.overdueTasks || 0}
           icon={<AlertCircle className="h-5 w-5" />}
           colors="text-red-600 bg-red-50"
+          active={activeFilter === "overdue"}
+          onClick={() => handleFilterClick("overdue")}
         />
       </div>
+
+      {/* Filtered Task List */}
+      {activeFilter && (
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <ArrowUpDown className="h-4 w-4" />
+                {filterLabel[activeFilter] || "Tasks"}
+                <Badge variant="secondary" className="ml-1">{filteredTasks.length}</Badge>
+              </CardTitle>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setActiveFilter(null);
+                  router.replace("/analytics", { scroll: false });
+                }}
+              >
+                <X className="h-4 w-4 mr-1" />
+                Clear filter
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {filteredTasks.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                No tasks match this filter.
+              </p>
+            ) : (
+              <div className="space-y-1">
+                {/* Table Header */}
+                <div className="grid grid-cols-[1fr_120px_100px_120px] gap-3 px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                  <span>Task</span>
+                  <span>Status</span>
+                  <span>Priority</span>
+                  <span>Due Date</span>
+                </div>
+                <Separator />
+                {/* Task Rows */}
+                {filteredTasks.map((task) => (
+                  <TaskRow key={task.$id} task={task} projects={projects || []} />
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Tasks by Status */}
@@ -244,15 +359,24 @@ function StatCard({
   icon,
   colors,
   subtitle,
+  active,
+  onClick,
 }: {
   title: string;
   value: number;
   icon: React.ReactNode;
   colors: string;
   subtitle?: string;
+  active?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <Card>
+    <Card
+      className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
+        active ? "ring-2 ring-primary border-primary/50 shadow-md" : "hover:border-primary/30"
+      }`}
+      onClick={onClick}
+    >
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
           <div>
@@ -266,5 +390,62 @@ function StatCard({
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function TaskRow({ task, projects }: { task: Task; projects: { $id: string; name: string; emoji?: string }[] }) {
+  const project = projects.find((p) => p.$id === task.projectId);
+  const statusConfig = TASK_STATUSES.find((s) => s.value === task.status);
+  const priorityConfig = TASK_PRIORITIES.find((p) => p.value === task.priority);
+
+  const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && task.status !== "done";
+
+  return (
+    <div className="grid grid-cols-[1fr_120px_100px_120px] gap-3 px-3 py-2.5 rounded-lg hover:bg-muted/50 transition-colors items-center text-sm">
+      <div className="min-w-0">
+        <p className="font-medium truncate">{task.title}</p>
+        {project && (
+          <p className="text-xs text-muted-foreground truncate mt-0.5">
+            {project.emoji || "📋"} {project.name}
+          </p>
+        )}
+      </div>
+      <div>
+        <Badge
+          variant="secondary"
+          className="text-xs font-medium"
+          style={{
+            backgroundColor: statusConfig?.color + "18",
+            color: statusConfig?.color,
+            borderColor: statusConfig?.color + "30",
+          }}
+        >
+          {statusConfig?.label || task.status}
+        </Badge>
+      </div>
+      <div>
+        <Badge
+          variant="secondary"
+          className="text-xs font-medium"
+          style={{
+            backgroundColor: priorityConfig?.color + "18",
+            color: priorityConfig?.color,
+            borderColor: priorityConfig?.color + "30",
+          }}
+        >
+          {priorityConfig?.label || task.priority}
+        </Badge>
+      </div>
+      <div className="flex items-center gap-1.5 text-xs">
+        {task.dueDate ? (
+          <span className={`flex items-center gap-1 ${isOverdue ? "text-red-600 font-medium" : "text-muted-foreground"}`}>
+            <Calendar className="h-3 w-3" />
+            {new Date(task.dueDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+          </span>
+        ) : (
+          <span className="text-muted-foreground">—</span>
+        )}
+      </div>
+    </div>
   );
 }

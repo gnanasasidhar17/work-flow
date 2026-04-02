@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
   const searchParams = useSearchParams();
@@ -159,24 +160,28 @@ export default function DashboardPage() {
           value={totalTasks}
           icon={<BarChart3 className="h-5 w-5" />}
           color="text-blue-600 bg-blue-50"
+          href="/analytics?filter=all"
         />
         <StatsCard
           title="Completed"
           value={completedTasks}
           icon={<CheckCircle2 className="h-5 w-5" />}
           color="text-emerald-600 bg-emerald-50"
+          href="/analytics?filter=completed"
         />
         <StatsCard
           title="In Progress"
           value={inProgressTasks}
           icon={<Clock className="h-5 w-5" />}
           color="text-amber-600 bg-amber-50"
+          href="/analytics?filter=in-progress"
         />
         <StatsCard
           title="Overdue"
           value={overdueTasks}
           icon={<AlertCircle className="h-5 w-5" />}
           color="text-red-600 bg-red-50"
+          href="/analytics?filter=overdue"
         />
       </div>
 
@@ -261,9 +266,9 @@ export default function DashboardPage() {
   );
 }
 
-function StatsCard({ title, value, icon, color }: { title: string; value: number; icon: React.ReactNode; color: string }) {
-  return (
-    <Card>
+function StatsCard({ title, value, icon, color, href }: { title: string; value: number; icon: React.ReactNode; color: string; href?: string }) {
+  const card = (
+    <Card className={href ? "cursor-pointer hover:shadow-md hover:border-primary/30 transition-all duration-200" : ""}>
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
           <div>
@@ -277,6 +282,11 @@ function StatsCard({ title, value, icon, color }: { title: string; value: number
       </CardContent>
     </Card>
   );
+
+  if (href) {
+    return <Link href={href}>{card}</Link>;
+  }
+  return card;
 }
 
 function CreateWorkspaceDialog({
